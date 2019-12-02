@@ -1,38 +1,31 @@
-const express = require("express");
-const userModel = require("../models/User");
-const router = new express.Router();
-const uploadCloud = require("../config/cloudinary");
 
-router.get("/", (req, res) => {
-  userModel
-    .find()
-    .then(dbRes => {
-      res.json(dbRes);
-    })
-    .catch(err => {
-      console.log(err);
-      res.json(err);
-    });
+const mongoose = require("mongoose");
+​
+const Schema = mongoose.Schema;
+​
+const artistSchema = new Schema({
+  name: String,
+  style: {
+    type: Schema.Types.ObjectId,
+    ref: "Style"
+  },
+  description: String,
+  isBand: Boolean,
+  rates: [
+    {
+      rate: Number,
+      author: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+      },
+      date: {
+        type: Date,
+        default: Date.now()
+      }
+    }
+  ]
 });
-
-router.post("/", uploadCloud.single("image"), (req, res) => {
-  const { userName, firstName, lastName } = req.body;
-  const newUser = {
-    userName,
-    firstName,
-    lastName
-  };
-  if (req.file) newUser.image = req.file.secure_url;
-  
-  userModel
-    .create(newUser)
-    .then(dbRes => {
-      res.send(dbRes);
-    })
-    .catch(err => {
-      console.log(err);
-      res.json(err);
-    });
-});
-
-module.exports = router;
+​
+const artistModel = mongoose.model("Artist", artistSchema);
+​
+module.exports = artistModel;
