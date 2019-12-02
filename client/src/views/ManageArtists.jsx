@@ -19,10 +19,14 @@ const ManageArtists = () => {
       .catch(apiErr => console.error(apiErr));
   }, []);
 
+  const deleteArtist= ()=>{
+    
+  }
+
   return (
     <div>
       <h1>Manage Artists</h1>
-      <table>
+      <table className="table">
         <thead>
           <tr>
             <th>Name</th>
@@ -43,7 +47,8 @@ const ManageArtists = () => {
               {a.isBand ? <td>Yes !</td> : <td>No!</td>}
               <td>{a.Rates}</td>
               <td>Edit</td>
-              <td>X</td>
+              <td onClick={deleteArtist}>X</td>
+              
             </tr>
           ))}
         </tbody>

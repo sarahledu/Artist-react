@@ -30,4 +30,8 @@ router.post("/create-artist", (req, res) => {
     });
 });
 
+router.get("/manage-artists/delete/:id",(req,res)=>{
+    artistModel.findByIdAndRemove({_id: req.params.id}).then().catch(err=>console.log(err))
+})
+
 module.exports = router;
