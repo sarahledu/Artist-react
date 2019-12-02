@@ -6,10 +6,17 @@ router.get("/manage-albums", (req, res) => {
   albumModel
     .find()
     .then(dbRes => {
-      console.log(dbRes);
       res.send(dbRes);
     })
     .catch(err => console.log(err));
+});
+router.post("/manage-albums/delete", (req, res) => {
+  albumModel
+    .findByIdAndDelete({ _id: req.body.id })
+    .then(res.redirect("/manage-albums"))
+    .catch(dbErr => {
+      console.log(dbErr);
+    });
 });
 
 router.post("/create-album", (req, res) => {
