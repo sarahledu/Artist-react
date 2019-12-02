@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import APIHandler from "./../api/handler";
+import APIHandler from "../api/handler";
+
 const handler = new APIHandler();
 console.log("handler=>", handler);
 
-export default function ManageArtists() {
+const ManageArtists =()=> {
     const [artists, setArtists] =useState([]);
 
 
@@ -22,8 +23,10 @@ export default function ManageArtists() {
     return (
         <div>
             <h1>Manage Artists</h1>
-            <span>{}</span>
+            <span>{artists}</span>
     
         </div>
     )
 }
+
+export default ManageArtists
