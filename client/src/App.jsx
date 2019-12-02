@@ -25,7 +25,6 @@ function App() {
           <Route path="/create-artist" component={CreateArtist} />
           <Route path="/create-album" component={CreateAlbum} />
         </Switch>
-      
     </div>
   );
 }

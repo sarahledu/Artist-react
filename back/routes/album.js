@@ -2,7 +2,7 @@ const express = require("express");
 const albumModel = require("./../models/Album");
 const router = new express.Router();
 
-router.get("/all-albums", (req, res) => {
+router.get("/manage-albums", (req, res) => {
   albumModel
     .find()
     .then(dbRes => {
