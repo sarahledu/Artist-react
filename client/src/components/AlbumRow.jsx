@@ -15,8 +15,15 @@ export default function AlbumRow() {
       .catch(apiErr => console.error(apiErr));
   }, []);
 
-  const deleteAlbum = e => {
-    console.log("delete button activated");
+  const deleteAlbum = id => {
+    handler
+      .post("/manage-albums/delete", { id: id })
+      .then(apiRes => {
+        setAlbums(apiRes.data);
+      })
+      .catch(apiErr => {
+        console.log(apiErr);
+      });
   };
   const editAlbum = e => {
     console.log("edit button activated");
@@ -36,7 +43,7 @@ export default function AlbumRow() {
         <button onClick={editAlbum}>Edit</button>
       </td>
       <td>
-        <button onClick={deleteAlbum}>Delete</button>
+        <button onClick={() => deleteAlbum(v._id)}>Delete</button>
       </td>
     </tr>
   ));
