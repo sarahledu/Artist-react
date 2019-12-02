@@ -1,12 +1,27 @@
 const express = require("express");
-const artistModel = require("../models/Artist");
+const artistModel = require("./../models/Artist");
 const router = new express.Router();
 
+router.get("/all-artists", (req, res) => {
+  artistModel
+    .find()
+    .then(dbRes => console.log(dbRes))
+    .catch(err => console.log(err));
+});
 
-router.get("/artists", (req,res)=>{
-    artistModel.find()
-    .then(dbRes=>console.log(dbRes))
-    .catch(err=>console.log(err))
-})
+router.post("/artist-create", (req, res) => {
+  const { name, style, description, isBand, rates } = req.body;
+  const newArtist = {
+    name,
+    style,
+    description,
+    isBand,
+    rates
+  };
+  artistModel
+    .create(newArtist)
+    .then(dbRes=>res.json(dbRes))
+    .catch(err=>{console.log(err);res.json(err)});
+});
 
 module.exports = router;
