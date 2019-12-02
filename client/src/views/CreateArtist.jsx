@@ -3,25 +3,18 @@ import APIHandler from "../api/handler";
 const handler = new APIHandler();
 console.log("handler=>", handler);
 
-const CreateArtist = () => {
+const CreateArtist = props => {
   const [artist, setArtist] = useState({ isBand: false });
 
-  function handleSubmit(e) {
+  const handleSubmit = e => {
     e.preventDefault();
-    console.log("in the submit", artist);
-    const formData = new FormData();
-    for (let key in artist) {
-      console.log(key);
-      formData.append(key, artist[key]);
-    }
-    console.log(formData);
     handler
-      .post("/create-artist", formData)
+      .post("/create-artist", artist)
       .then(apiRes => {
-        console.log(apiRes);
+        props.history.push("/manage-artists");
       })
       .catch(apiErr => console.log(apiErr));
-  }
+  };
 
   function handleChange(e) {
     const key = e.target.name;
@@ -42,8 +35,8 @@ const CreateArtist = () => {
       <form onChange={handleChange} onSubmit={handleSubmit}>
         <label htmlFor="name">Name</label>
         <input id="name" type="text" name="name" />
-        <label htmlFor="style">Style</label>
-        <input id="style" type="text" name="style" />
+        {/* <label htmlFor="style">Style</label>
+        <input id="style" type="text" name="style" /> */}
         <label htmlFor="description">Description</label>
         <input id="description" type="text" name="description" />
         <label htmlFor="isBand">Band</label>
