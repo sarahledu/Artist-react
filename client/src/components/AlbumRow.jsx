@@ -32,7 +32,7 @@ export default function AlbumRow() {
   return albums.map((v, i) => (
     <tr key={i}>
       <td>{v.title}</td>
-      <td>{v.releaseDate.slice(0, 10)}</td>
+      <td>{v.releaseDate ? v.releaseDate.slice(0, 10) : "no date"}</td>
       <td>{v.artist}</td>
       <td>
         <img className="cover" src={v.cover} alt="" />
