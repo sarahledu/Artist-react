@@ -11,6 +11,16 @@ router.get("/manage-albums", (req, res) => {
     })
     .catch(err => console.log(err));
 });
+router.get("/manage-albums/delete/:id", (req, res) => {
+  albumModel
+    .findByIdAndDelete({ _id: req.params.id })
+    .then(dbRes => {
+      console.log(dbRes);
+    })
+    .catch(dbErr => {
+      console.log(dbErr);
+    });
+});
 
 router.post("/create-album", (req, res) => {
   const {

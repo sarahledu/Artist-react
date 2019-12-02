@@ -14,19 +14,30 @@ export default function AlbumRow() {
       })
       .catch(apiErr => console.error(apiErr));
   }, []);
-  console.log(albums);
+
+  const deleteAlbum = e => {
+    console.log("delete button activated");
+  };
+  const editAlbum = e => {
+    console.log("edit button activated");
+  };
+
   return albums.map((v, i) => (
     <tr key={i}>
       <td>{v.title}</td>
-      <td>{v.releaseDate}</td>
+      <td>{v.releaseDate.slice(0, 10)}</td>
       <td>{v.artist}</td>
       <td>
         <img className="cover" src={v.cover} alt="" />
       </td>
       <td>{v.description}</td>
-      <td>{v.rates}</td>
-      <td>{v.rates}</td>
-      <td>{v.rates}</td>
+      <td>Coming..</td>
+      <td>
+        <button onClick={editAlbum}>Edit</button>
+      </td>
+      <td>
+        <button onClick={deleteAlbum}>Delete</button>
+      </td>
     </tr>
   ));
 }

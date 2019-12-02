@@ -12,8 +12,8 @@ export default function AlbumTable() {
           <th>Cover</th>
           <th>description</th>
           <th>Rates</th>
-          <th>Delete</th>
           <th>Edit</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
