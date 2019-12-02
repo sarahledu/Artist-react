@@ -11,8 +11,11 @@ server.use(express.json({ extended: true }));
 const userRouter = require("./routes/user");
 server.use("/users", userRouter);
 
-const artistRouter = require("./routes/artist")
-server.use("/", artistRouter)
+const artistRouter = require("./routes/artist");
+server.use("/", artistRouter);
+
+const albumRouter = require("./routes/album");
+server.use("/", albumRouter);
 
 server.listen(process.env.PORT, () => {
   console.log("Listening on http://localhost:" + process.env.PORT);
