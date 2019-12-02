@@ -19,9 +19,12 @@ const ManageArtists = () => {
       .catch(apiErr => console.error(apiErr));
   }, []);
 
-  const deleteArtist= ()=>{
-    
-  }
+  const deleteArtist = id => {
+    handler
+      .post("/manage-artists/delete/", { id: id })
+      .then(apiRes=>{setArtists(apiRes.data)})
+      .catch(err => console.log(err));
+  };
 
   return (
     <div>
@@ -47,8 +50,7 @@ const ManageArtists = () => {
               {a.isBand ? <td>Yes !</td> : <td>No!</td>}
               <td>{a.Rates}</td>
               <td>Edit</td>
-              <td onClick={deleteArtist}>X</td>
-              
+              <td onClick={() => deleteArtist(a._id)}>X</td>
             </tr>
           ))}
         </tbody>
