@@ -3,13 +3,15 @@ import APIHandler from "../api/handler";
 import { useState } from "react";
 
 const handler = new APIHandler();
-export default function CreateAlbum() {
+export default function CreateAlbum(props) {
   const [album, setAlbum] = useState({});
   const handleSubmit = evt => {
     evt.preventDefault();
     handler
       .post("/create-album", album)
-      .then(apiRes => console.log(apiRes))
+      .then(apiRes => {
+        props.history.push("/manage-albums");
+      })
       .catch(apiErr => console.log(apiErr));
   };
   const handleChange = evt => {
